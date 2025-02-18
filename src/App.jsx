@@ -110,9 +110,17 @@ const CreateNew = (props) => {
       info: info.value,
       votes: 0,
     });
-
     navigate('/');
   };
+
+  const handleReset = (e) => {
+      e.preventDefault();
+
+      content.setValue('');
+      author.setValue('');
+      info.setValue('');
+
+    }
 
   return (
     <div>
@@ -120,17 +128,18 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input type="text" {...content} />
+          <input type="text" value={content.value} onChange={content.onChange} />
         </div>
         <div>
           author
-          <input type="text" {...author} />
+          <input type="text" value={author.value} onChange={author.onChange} />
         </div>
         <div>
           url for more info
-          <input type="text" {...info} />
+          <input type="text"  value={info.value} onChange={info.onChange} />
         </div>
         <button>create</button>
+        <button onClick={handleReset}>reset</button>
       </form>
     </div>
   );
