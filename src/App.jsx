@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router';
+import { useField } from './hooks';
 
 const Menu = ({ anecdotes, addNew, notification }) => {
   const padding = {
@@ -95,9 +96,9 @@ const Footer = () => (
 );
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
-  const [info, setInfo] = useState('');
+  const content = useField();
+  const author = useField();
+  const info = useField();
 
   const navigate = useNavigate();
 
@@ -119,15 +120,15 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name="content" value={content} onChange={(e) => setContent(e.target.value)} />
+          <input type="text" {...content} />
         </div>
         <div>
           author
-          <input name="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input type="text" {...author} />
         </div>
         <div>
           url for more info
-          <input name="info" value={info} onChange={(e) => setInfo(e.target.value)} />
+          <input type="text" {...info} />
         </div>
         <button>create</button>
       </form>
